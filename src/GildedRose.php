@@ -2,9 +2,15 @@
 
 namespace Kata;
 
+
 class GildedRose
 {
-    public $name;
+    const NORMAL            = 'normal';
+    const AGED_BRIE         = 'Aged Brie';
+    const BACKSTAGE_PASSES  = 'Backstage passes to a TAFKAL80ETC concert';
+    const SULFURAS          = 'Sulfuras, Hand of Ragnaros';
+
+    private $name;
 
     public $quality;
 
@@ -23,9 +29,9 @@ class GildedRose
 
     public function tick()
     {
-        if ($this->name != 'Aged Brie' and $this->name != 'Backstage passes to a TAFKAL80ETC concert') {
+        if ($this->name != static::AGED_BRIE and $this->name != static::BACKSTAGE_PASSES) {
             if ($this->quality > 0) {
-                if ($this->name != 'Sulfuras, Hand of Ragnaros') {
+                if ($this->name != static::SULFURAS) {
                     $this->quality = $this->quality - 1;
                 }
             }
@@ -33,7 +39,7 @@ class GildedRose
             if ($this->quality < 50) {
                 $this->quality = $this->quality + 1;
 
-                if ($this->name == 'Backstage passes to a TAFKAL80ETC concert') {
+                if ($this->name == static::BACKSTAGE_PASSES) {
                     if ($this->sellIn < 11) {
                         if ($this->quality < 50) {
                             $this->quality = $this->quality + 1;
@@ -48,15 +54,15 @@ class GildedRose
             }
         }
 
-        if ($this->name != 'Sulfuras, Hand of Ragnaros') {
+        if ($this->name != static::SULFURAS) {
             $this->sellIn = $this->sellIn - 1;
         }
 
         if ($this->sellIn < 0) {
-            if ($this->name != 'Aged Brie') {
-                if ($this->name != 'Backstage passes to a TAFKAL80ETC concert') {
+            if ($this->name != static::AGED_BRIE) {
+                if ($this->name != static::BACKSTAGE_PASSES) {
                     if ($this->quality > 0) {
-                        if ($this->name != 'Sulfuras, Hand of Ragnaros') {
+                        if ($this->name != static::SULFURAS) {
                             $this->quality = $this->quality - 1;
                         }
                     }
