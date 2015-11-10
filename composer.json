@@ -1,6 +1,6 @@
 {
     "require": {
-        "phpunit/phpunit": "^5.0",
+        "phpunit/phpunit": "4.7",
         "squizlabs/php_codesniffer": "~2.3"
     },
     "autoload": {
