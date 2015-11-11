@@ -1,10 +1,5 @@
 <?php
 
-// use PHPUnit_Framework_TestCase;
-
-require __DIR__.'/../src/GildedRose.php';
-
-
 use Kata\GildedRose;
 
 class GildedRoseTest extends PHPUnit_Framework_TestCase
