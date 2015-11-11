@@ -33,6 +33,14 @@ class GildedRoseTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Kata\BackstagePasses::class, $item);
     }
 
+
+    /** @test */
+    public function it_returns_a_conjured_item()
+    {
+        $item = GildedRose::of(GildedRose::CONJURED, 10, 5);
+        $this->assertInstanceOf(Kata\Conjured::class, $item);
+    }
+
     /** @test */
     public function it_updates_normal_items_before_sell_datei() {
         $item = GildedRose::of(GildedRose::NORMAL, 10, 5); // quality, sell in X days
@@ -285,66 +293,63 @@ class GildedRoseTest extends PHPUnit_Framework_TestCase
 
 
 
-            // /** @test */
-            // public function updates_onjured_items_before_the_sell_date() {
-            //     $item = GildedRose::of('Conjured Mana Cake', 10, 10);
+    /** @test */
+    public function updates_onjured_items_before_the_sell_date() {
+        $item = GildedRose::of(GildedRose::CONJURED, 10, 10);
 
-            //     $item->tick();
+        $item->tick();
 
-            //     $this->assertSame($item->quality, 8);
-            //     $this->assertSame($item->sellIn, 9);
-            // }
+        $this->assertSame($item->quality, 8);
+        $this->assertSame($item->sellIn, 9);
+    }
 
-            // /** @test */
-            // public function updates_onjured_items_at_zero_quality() {
-            //     $item = GildedRose::of('Conjured Mana Cake', 0, 10);
+    /** @test */
+    public function updates_onjured_items_at_zero_quality() {
+        $item = GildedRose::of(GildedRose::CONJURED, 0, 10);
 
-            //     $item->tick();
+        $item->tick();
 
-            //     $this->assertSame($item->quality, 0);
-            //     $this->assertSame($item->sellIn, 9);
-            // }
+        $this->assertSame($item->quality, 0);
+        $this->assertSame($item->sellIn, 9);
+    }
 
-            // /** @test */
-            // public function updates_onjured_items_on_the_sell_date() {
-            //     $item = GildedRose::of('Conjured Mana Cake', 10, 0);
+    /** @test */
+    public function updates_onjured_items_on_the_sell_date() {
+        $item = GildedRose::of(GildedRose::CONJURED, 10, 0);
 
-            //     $item->tick();
+        $item->tick();
 
-            //     $this->assertSame($item->quality, 6);
-            //     $this->assertSame($item->sellIn, -1);
-            // }
+        $this->assertSame($item->quality, 6);
+        $this->assertSame($item->sellIn, -1);
+    }
 
-            // * @test
-            // public function updates_onjured_items_on_the_sell_date_at_0_quality() {
-            //     $item = GildedRose::of('Conjured Mana Cake', 0, 0);
+    /** @test */
+    public function updates_onjured_items_on_the_sell_date_at_0_quality() {
+        $item = GildedRose::of(GildedRose::CONJURED, 0, 0);
 
-            //     $item->tick();
+        $item->tick();
 
-            //     $this->assertSame($item->quality, 0);
-            //     $this->assertSame($item->sellIn, -1);
-            // }
+        $this->assertSame($item->quality, 0);
+        $this->assertSame($item->sellIn, -1);
+    }
 
-            // /** @test */
-            // public function updates_onjured_items_after_the_sell_date() {
-            //     $item = GildedRose::of('Conjured Mana Cake', 10, -10);
+    /** @test */
+    public function updates_onjured_items_after_the_sell_date() {
+        $item = GildedRose::of(GildedRose::CONJURED, 10, -10);
 
-            //     $item->tick();
+        $item->tick();
 
-            //     $this->assertSame($item->quality, 6);
-            //     $this->assertSame($item->sellIn, -11);
-            // }
+        $this->assertSame($item->quality, 6);
+        $this->assertSame($item->sellIn, -11);
+    }
 
-            // /** @test */
-            // public function updates_onjured_items_after_the_sell_date_at_zero_quality() {
-            //     $item = GildedRose::of('Conjured Mana Cake', 0, -10);
+    /** @test */
+    public function updates_onjured_items_after_the_sell_date_at_zero_quality() {
+        $item = GildedRose::of(GildedRose::CONJURED, 0, -10);
 
-            //     $item->tick();
+        $item->tick();
 
-            //     $this->assertSame($item->quality, 0);
-            //     $this->assertSame($item->sellIn, -11);
-            // }
-
-
-
+        $this->assertSame($item->quality, 0);
+        $this->assertSame($item->sellIn, -11);
+    }
 }
