@@ -21,7 +21,7 @@ class Normal implements Item {
         $this->decreaseSellIn();
 
         $amount = ($this->sellDateExpired()) ? 2 : 1;
-        $this->decreaseQuality($amount);
+        $this->decradeQuality($amount);
     }
 
     protected function decreaseSellIn()
@@ -29,12 +29,12 @@ class Normal implements Item {
         $this->sellIn = $this->sellIn - 1;
     }
 
-    protected function decreaseQuality($amount = 1)
+    protected function decradeQuality($amount = 1)
     {
         $this->quality = max(static::MIN_QUALITY, $this->quality - $amount);
     }
 
-    protected function increaseQuality($amount = 1)
+    protected function improveQuality($amount = 1)
     {
         $this->quality = min(static::MAX_QUALITY, $this->quality + $amount);
     }

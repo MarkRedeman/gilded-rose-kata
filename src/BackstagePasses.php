@@ -13,7 +13,7 @@ class BackstagePasses extends Normal implements Item
     {
         $this->decreaseSellIn();
 
-        $this->increaseQuality(
+        $this->improveQuality(
             $this->qualityIncrease()
         );
     }

@@ -9,6 +9,6 @@ class AgedBrie extends Normal implements Item
         $this->decreaseSellIn();
 
         $amount = ($this->sellDateExpired()) ? 2 : 1;
-        $this->increaseQuality($amount);
+        $this->improveQuality($amount);
     }
 }
