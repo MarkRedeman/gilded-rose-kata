@@ -2,13 +2,15 @@
 
 namespace Kata;
 
-
 class GildedRose
 {
     const NORMAL            = 'normal';
     const AGED_BRIE         = 'Aged Brie';
     const BACKSTAGE_PASSES  = 'Backstage passes to a TAFKAL80ETC concert';
     const SULFURAS          = 'Sulfuras, Hand of Ragnaros';
+
+    const MAX_QUALITY = 50;
+    const MIN_QUALITY = 0;
 
     private $name;
 
@@ -47,15 +49,17 @@ class GildedRose
 
         $this->decreaseSellIn();
 
-        if ($this->sellIn < 0) {
-            if ($this->name === static::AGED_BRIE) {
-                $this->increaseQuality();
+        if ($this->sellIn >= 0) {
+            return;
+        }
+
+        if ($this->name === static::AGED_BRIE) {
+            $this->increaseQuality();
+        } else {
+            if ($this->name != static::BACKSTAGE_PASSES) {
+                $this->decreaseQuality();
             } else {
-                if ($this->name != static::BACKSTAGE_PASSES) {
-                    $this->decreaseQuality();
-                } else {
-                    $this->quality = 0;
-                }
+                $this->quality = 0;
             }
         }
     }
@@ -67,16 +71,12 @@ class GildedRose
 
     private function decreaseQuality()
     {
-        if ($this->quality > 0) {
-            $this->quality = $this->quality - 1;
-        }
+        $this->quality = max(static::MIN_QUALITY, $this->quality - 1);
     }
 
     private function increaseQuality()
     {
-        if ($this->quality < 50) {
-            $this->quality = $this->quality + 1;
-        }
+        $this->quality = min(static::MAX_QUALITY, $this->quality + 1);
     }
 
     private function increaseQualityOfBackstagePasses()
