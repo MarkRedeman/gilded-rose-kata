@@ -30,50 +30,62 @@ class GildedRose
     public function tick()
     {
         if ($this->name != static::AGED_BRIE and $this->name != static::BACKSTAGE_PASSES) {
-            if ($this->quality > 0) {
-                if ($this->name != static::SULFURAS) {
-                    $this->quality = $this->quality - 1;
-                }
-            }
+            $this->decreaseQuality();
         } else {
             if ($this->quality < 50) {
                 $this->quality = $this->quality + 1;
 
                 if ($this->name == static::BACKSTAGE_PASSES) {
-                    if ($this->sellIn < 11) {
-                        if ($this->quality < 50) {
-                            $this->quality = $this->quality + 1;
-                        }
-                    }
-                    if ($this->sellIn < 6) {
-                        if ($this->quality < 50) {
-                            $this->quality = $this->quality + 1;
-                        }
-                    }
+                    $this->increaseQualityOfBackstagePasses();
                 }
             }
         }
 
+        $this->decreaseSellIn();
+
+        if ($this->sellIn < 0) {
+            if ($this->name === static::AGED_BRIE) {
+                $this->increaseQuality();
+            } else {
+                if ($this->name != static::BACKSTAGE_PASSES) {
+                    $this->decreaseQuality();
+                } else {
+                    $this->quality = 0;
+                }
+            }
+        }
+    }
+
+    private function decreaseSellIn()
+    {
         if ($this->name != static::SULFURAS) {
             $this->sellIn = $this->sellIn - 1;
         }
+    }
 
-        if ($this->sellIn < 0) {
-            if ($this->name != static::AGED_BRIE) {
-                if ($this->name != static::BACKSTAGE_PASSES) {
-                    if ($this->quality > 0) {
-                        if ($this->name != static::SULFURAS) {
-                            $this->quality = $this->quality - 1;
-                        }
-                    }
-                } else {
-                    $this->quality = $this->quality - $this->quality;
-                }
-            } else {
-                if ($this->quality < 50) {
-                    $this->quality = $this->quality + 1;
-                }
+    private function decreaseQuality()
+    {
+        if ($this->quality > 0) {
+            if ($this->name != static::SULFURAS) {
+                $this->quality = $this->quality - 1;
             }
+        }
+    }
+
+    private function increaseQuality()
+    {
+        if ($this->quality < 50) {
+            $this->quality = $this->quality + 1;
+        }
+    }
+
+    private function increaseQualityOfBackstagePasses()
+    {
+        if ($this->sellIn < 11) {
+            $this->increaseQuality();
+        }
+        if ($this->sellIn < 6) {
+            $this->increaseQuality();
         }
     }
 }
