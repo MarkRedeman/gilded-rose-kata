@@ -1,0 +1,112 @@
+Humbug running test suite to generate logs and code coverage data...
+Humbug has completed the initial test run successfully.
+Tests: 23 Line Coverage: 100.00%
+Humbug is analysing source files...
+Mutation Testing is commencing on 1 files...
+(.: killed, M: escaped, S: uncovered, E: fatal error, T: timed out)
+E....................M..........M.M
+35 mutations were generated:
+      31 mutants were killed
+       0 mutants were not covered by tests
+       3 covered mutants were not detected
+       1 fatal errors were encountered
+       0 time outs were encountered
+
+Metrics:
+    Mutation Score Indicator (MSI): 91%
+    Mutation Code Coverage: 100%
+    Covered Code MSI: 91%
+
+Remember that some mutants will inevitably be harmless (i.e. false positives).
+Time: 5.09 seconds Memory: 6.75MB
+Humbug results are being logged as JSON to: humbugl.log.json
+Humbug results are being logged as TEXT to: humbuglog.txt
+------
+Escapes
+------
+
+
+1) \Humbug\Mutator\Number\IntegerValue
+Diff on \Kata\GildedRose::decreaseQuality() in /home/mark/Projects/webdev/gilded-rose-kata/src/GildedRose.php:
+--- Original
++++ New
+@@ @@
+     {
+-        if ($this->quality > 0) {
++        if ($this->quality > 1) {
+             $this->quality = $this->quality - 1;
+         }
+     }
+
+     private function increaseQuality()
+     {
+
+
+2) \Humbug\Mutator\ConditionalBoundary\LessThan
+Diff on \Kata\GildedRose::increaseQualityOfBackstagePasses() in /home/mark/Projects/webdev/gilded-rose-kata/src/GildedRose.php:
+--- Original
++++ New
+@@ @@
+         }
+-        if ($this->sellIn < 6) {
++        if ($this->sellIn <= 6) {
+             $this->increaseQuality();
+         }
+     }
+ }
+
+
+
+3) \Humbug\Mutator\Number\IntegerValue
+Diff on \Kata\GildedRose::increaseQualityOfBackstagePasses() in /home/mark/Projects/webdev/gilded-rose-kata/src/GildedRose.php:
+--- Original
++++ New
+@@ @@
+         }
+-        if ($this->sellIn < 6) {
++        if ($this->sellIn < 7) {
+             $this->increaseQuality();
+         }
+     }
+ }
+
+
+
+------
+Errors
+------
+
+
+1) \Humbug\Mutator\ReturnValue\NewObject
+Diff on \Kata\GildedRose::of() in /home/mark/Projects/webdev/gilded-rose-kata/src/GildedRose.php:
+--- Original
++++ New
+@@ @@
+     public static function of($name, $quality, $sellIn) {
+-        return new static($name, $quality, $sellIn);
++        new static($name, $quality, $sellIn); return null;
+     }
+
+     public function tick()
+     {
+         if ($this->name === static::SULFURAS) {
+             return;
+
+The following output was received on stderr:
+
+PHP Fatal error:  Call to a member function tick() on null in /home/mark/Projects/webdev/gilded-rose-kata/tests/GildedRoseTest.php on line 16
+PHP Stack trace:
+PHP   1. {main}() /home/mark/Projects/webdev/gilded-rose-kata/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /home/mark/Projects/webdev/gilded-rose-kata/vendor/phpunit/phpunit/phpunit:36
+PHP   3. PHPUnit_TextUI_Command->run() /home/mark/Projects/webdev/gilded-rose-kata/vendor/phpunit/phpunit/src/TextUI/Command.php:105
+PHP   4. PHPUnit_TextUI_TestRunner->doRun() /home/mark/Projects/webdev/gilded-rose-kata/vendor/phpunit/phpunit/src/TextUI/Command.php:153
+PHP   5. PHPUnit_Framework_TestSuite->run() /home/mark/.composer/vendor/phpunit/phpunit/src/TextUI/TestRunner.php:440
+PHP   6. PHPUnit_Framework_TestSuite->run() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestSuite.php:747
+PHP   7. PHPUnit_Framework_TestCase->run() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestSuite.php:747
+PHP   8. PHPUnit_Framework_TestResult->run() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestCase.php:724
+PHP   9. PHPUnit_Framework_TestCase->runBare() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestResult.php:612
+PHP  10. PHPUnit_Framework_TestCase->runTest() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestCase.php:768
+PHP  11. ReflectionMethod->invokeArgs() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestCase.php:909
+PHP  12. GildedRoseTest->it_updates_normal_items_before_sell_datei() /home/mark/.composer/vendor/phpunit/phpunit/src/Framework/TestCase.php:909
+
+

@@ -1,0 +1,57 @@
+Humbug running test suite to generate logs and code coverage data...
+Humbug has completed the initial test run successfully.
+Tests: 25 Line Coverage: 100.00%
+Humbug is analysing source files...
+Mutation Testing is commencing on 4 files...
+(.: killed, M: escaped, S: uncovered, E: fatal error, T: timed out)
+........................M.M..
+29 mutations were generated:
+      27 mutants were killed
+       0 mutants were not covered by tests
+       2 covered mutants were not detected
+       0 fatal errors were encountered
+       0 time outs were encountered
+
+Metrics:
+    Mutation Score Indicator (MSI): 93%
+    Mutation Code Coverage: 100%
+    Covered Code MSI: 93%
+
+Remember that some mutants will inevitably be harmless (i.e. false positives).
+Time: 4.22 seconds Memory: 6.50MB
+Humbug results are being logged as JSON to: humbugl.log.json
+Humbug results are being logged as TEXT to: humbuglog.txt
+------
+Escapes
+------
+
+
+1) \Humbug\Mutator\ConditionalBoundary\LessThan
+Diff on \Kata\Normal::increaseQualityOfBackstagePasses() in /home/mark/Projects/webdev/gilded-rose-kata/src/Normal.php:
+--- Original
++++ New
+@@ @@
+         }
+-        if ($this->sellIn < 6) {
++        if ($this->sellIn <= 6) {
+             $this->increaseQuality();
+         }
+     }
+ }
+
+
+
+2) \Humbug\Mutator\Number\IntegerValue
+Diff on \Kata\Normal::increaseQualityOfBackstagePasses() in /home/mark/Projects/webdev/gilded-rose-kata/src/Normal.php:
+--- Original
++++ New
+@@ @@
+         }
+-        if ($this->sellIn < 6) {
++        if ($this->sellIn < 7) {
+             $this->increaseQuality();
+         }
+     }
+ }
+
+
