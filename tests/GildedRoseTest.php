@@ -4,6 +4,35 @@ use Kata\GildedRose;
 
 class GildedRoseTest extends PHPUnit_Framework_TestCase
 {
+
+    /** @test */
+    public function it_returns_an_item()
+    {
+        $item = GildedRose::of(GildedRose::NORMAL, 10, 5);
+        $this->assertInstanceOf(Kata\Item::class, $item);
+    }
+
+    /** @test */
+    public function it_returns_a_aged_brie_item()
+    {
+        $item = GildedRose::of(GildedRose::AGED_BRIE, 10, 5);
+        $this->assertInstanceOf(Kata\AgedBrie::class, $item);
+    }
+
+    /** @test */
+    public function it_returns_a_sulfuras_item()
+    {
+        $item = GildedRose::of(GildedRose::SULFURAS, 10, 5);
+        $this->assertInstanceOf(Kata\Sulfuras::class, $item);
+    }
+
+    /** @test */
+    public function it_returns_a_backstage_passes_item()
+    {
+        $item = GildedRose::of(GildedRose::BACKSTAGE_PASSES, 10, 5);
+        $this->assertInstanceOf(Kata\BackstagePasses::class, $item);
+    }
+
     /** @test */
     public function it_updates_normal_items_before_sell_datei() {
         $item = GildedRose::of(GildedRose::NORMAL, 10, 5); // quality, sell in X days
