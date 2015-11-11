@@ -4,20 +4,34 @@ namespace Kata;
 
 class BackstagePasses extends Normal implements Item
 {
+    // These constants denote the sellIn days for which quality triples, doubles, or is lost
+    const TRIPLE_INCREASE = 5;
+    const DOUBLE_INCREASE = 10;
+    const LOSE_QUALITY = 0;
+
     public function tick()
     {
-        $this->increaseQuality();
-        if ($this->sellIn < 11) {
-            $this->increaseQuality();
-        }
-        if ($this->sellIn < 6) {
-            $this->increaseQuality();
-        }
-
         $this->decreaseSellIn();
 
-        if ($this->sellDateExpired()) {
-            $this->quality = 0;
+        $this->increaseQuality(
+            $this->qualityIncrease()
+        );
+    }
+
+    private function qualityIncrease()
+    {
+        if ($this->sellDateExpired())
+        {
+            return - $this->quality;
         }
+        if ($this->sellIn < static::TRIPLE_INCREASE)
+        {
+            return 3;
+        }
+        if ($this->sellIn < static::DOUBLE_INCREASE)
+        {
+            return 2;
+        }
+        return 1;
     }
 }

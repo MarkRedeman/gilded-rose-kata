@@ -221,6 +221,16 @@ class GildedRoseTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function quality_of_backstage_passes_have_double_increases_between_6_and_10_sellIn_days() {
+        $item = GildedRose::of(GildedRose::BACKSTAGE_PASSES, 10, 6);
+
+        $item->tick();
+
+        $this->assertSame($item->quality, 12); // goes up by 3
+        $this->assertSame($item->sellIn, 5);
+    }
+
+    /** @test */
     public function updates_Backstage_pass_items_very_close_to_the_sell_date_at_max_quality() {
         $item = GildedRose::of(GildedRose::BACKSTAGE_PASSES, 50, 5);
 
