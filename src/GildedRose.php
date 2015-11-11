@@ -29,6 +29,10 @@ class GildedRose
 
     public function tick()
     {
+        if ($this->name === static::SULFURAS) {
+            return;
+        }
+
         if ($this->name != static::AGED_BRIE and $this->name != static::BACKSTAGE_PASSES) {
             $this->decreaseQuality();
         } else {
@@ -58,17 +62,13 @@ class GildedRose
 
     private function decreaseSellIn()
     {
-        if ($this->name != static::SULFURAS) {
-            $this->sellIn = $this->sellIn - 1;
-        }
+        $this->sellIn = $this->sellIn - 1;
     }
 
     private function decreaseQuality()
     {
         if ($this->quality > 0) {
-            if ($this->name != static::SULFURAS) {
-                $this->quality = $this->quality - 1;
-            }
+            $this->quality = $this->quality - 1;
         }
     }
 
